@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="res\EnjoyPlay.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\MicrophoneDisabled.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\MicrophoneHot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\next.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\pause.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\play.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\PlayPressed.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\previous.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\stop.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\StopPressed.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\VolumeNormalBlue.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\music_128_128.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\music512.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\1369590782_49377.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bitmap1.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\press2play.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\press2pause.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\press2stop.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\add.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\delete.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\information.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\question.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\refresh.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\import_music.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\remove_music.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\musician.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\playcd_large.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\playcd_small.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\clock.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\open.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\open1.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\open64.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\open_green.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\next.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\previous.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\loopplay.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\loopplay1.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\onlyone.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\randompaly.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EnjoyPlay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnjoyPlayDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayListDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AboutSoftDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EnjoyPlay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EnjoyPlayDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayListDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AboutSoftDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EnjoyPlay.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
