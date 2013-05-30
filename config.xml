@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8">
+<!– SoftWare Configuration and Playlist saving –>
+<EnjoyPlay>
+	<Config>
+		<AutoPlay> true </AutoPlay>
+		<PlayMode> only_one </PlayMode>
+	</Config>
+	
+	<PlayList>
+		<song name="Soledad.mp3"  singer="Westlife" path="C:\Users\JarvisChu\Music"/>
+		<Song name="聊天.mp3" singer="guojing" path="C:\Users\JarvisChu\Music"/>
+	</PlayList>
+</EnjoyPlay> 

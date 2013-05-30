@@ -6,6 +6,8 @@
 #include "PlayListDlg.h"
 #include "afxdialogex.h"
 
+#include "tinyxml.h"
+
 #include <vector>
 
 using namespace std;
@@ -15,6 +17,110 @@ typedef struct {
 	CString singer; //歌手
 	CString path;	//目录
 }SONG;
+
+
+//char* 转化成 CString
+void ConvertCharToCString(const char* ch,CString& cs)
+{
+	//获得char的长度
+	int len = strlen(ch);
+	
+	//获得宽字节的长度
+	int wlen = MultiByteToWideChar (CP_ACP,0,ch,len,NULL,0);
+
+	//建立宽字节
+	wchar_t* buf = new wchar_t[wlen+1];
+
+	//转换
+	MultiByteToWideChar (CP_ACP,0,ch,len,buf,wlen);
+
+	//添加'\0'
+	buf[len]='\0';
+
+	//转化成CString
+	cs.Append(buf);
+
+	//删除缓冲区
+	delete []buf;
+}
+
+
+//CString 转化成char* ,返回char的长度
+int ConvertCStringToChar(CString& cs,char* ch)
+{
+	//计算出转换后char*的长度
+	int len = WideCharToMultiByte(CP_ACP,0,cs,cs.GetLength(),NULL,0,NULL,NULL);
+
+	//分配char*空间
+	ch = new char[len+1];
+
+	//转换
+	WideCharToMultiByte(CP_ACP,0,cs,cs.GetLength()+1,ch,len+1,NULL,NULL);
+
+	//结尾
+	ch[len+1]='/0';
+
+	return (len+1);
+}
+
+
+
+CString UTF8toUnicode(const char* utf8Str,UINT length)
+{
+    CString unicodeStr;
+    unicodeStr=_T("");
+ 
+    if (!utf8Str)
+        return unicodeStr;
+ 
+    if (length==0)
+        return unicodeStr;
+ 
+    //转换
+    WCHAR chr=0;
+    for (UINT i=0;i<length;)
+    {
+        if ((0x80&utf8Str[i])==0) // ASCII
+        {
+            chr=utf8Str[i];
+            i++;
+        }
+        else if((0xE0&utf8Str[i])==0xC0) // 110xxxxx 10xxxxxx
+        {
+            chr =(utf8Str[i+0]&0x3F)<<6;
+            chr|=(utf8Str[i+1]&0x3F);
+            i+=2;
+        }
+        else if((0xF0&utf8Str[i])==0xE0) // 1110xxxx 10xxxxxx 10xxxxxx
+        {
+            chr =(utf8Str[i+0]&0x1F)<<12;
+            chr|=(utf8Str[i+1]&0x3F)<<6;
+            chr|=(utf8Str[i+2]&0x3F);
+            i+=3;
+        }
+        /*
+        else if() // 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+        {}
+        else if() // 111110xx 10xxxxxx 10xxxxxx 10xxxxxx  10xxxxxx
+        {}
+        else if() // 1111110x 10xxxxxx 10xxxxxx 10xxxxxx  10xxxxxx 10xxxxxx 
+        {}
+        */
+        else // 不是UTF-8字符串
+        {
+            return unicodeStr;
+        }
+        unicodeStr.AppendChar(chr);
+    }
+ 
+    return unicodeStr;
+}
+ 
+CString UTF8toUnicode(const char* utf8Str)
+{
+    UINT theLength=strlen(utf8Str);
+    return UTF8toUnicode(utf8Str,theLength);
+}
 
 // CPlayListDlg dialog
 
@@ -270,22 +376,70 @@ void CPlayListDlg::OnPaint()
 //加载播放列表，没有则创建
 bool CPlayListDlg::LoadPlayList()
 {
-	//IsFileExist
-	//HANDLE hFile = CreateFile(_T("playlist.ep"),GENERIC_READ|GENERIC_WRITE,NULL,NULL,OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
+	TiXmlDocument* pDoc = new TiXmlDocument;
+	
+	if(pDoc == nullptr) return false;
 
-	//CFile* pFile = new CFile(_T("playlist.ep"),CFile::modeCreate);
-	//ar<<
-	//file.Close();
-	//CArchive ar(pFile,CArchive::load); //归档文件
+	//xml文件为utf-8格式
+	pDoc->LoadFile("config.xml",TIXML_ENCODING_UTF8);//);TIXML_ENCODING_UNKNOWN
 
-	//CStdioFile  file;
-	//file.Open(_T("playlist.ep"),CFile::modeCreate,NULL);
+	TiXmlElement* root = pDoc->FirstChildElement();
+	
+	TiXmlElement* config = root->FirstChildElement();
+	TiXmlElement* autoplay = config->FirstChildElement();
 
-	//file.ReadString(
-	//file.Close();
-	//
+	//是否自动播放
+	const char* ifAutoPlay = autoplay->GetText();
+	CString szAutoPlay;
+	ConvertCharToCString(ifAutoPlay,szAutoPlay);
+	//AfxMessageBox(szAutoPlay);
 
-	//CloseHandle(hFile);
+	//读取播放列表，并存放到播放列表控件中
+	TiXmlElement* playlist = config->NextSiblingElement();
+
+	this->m_ctrlPlayList.DeleteAllItems();//清空播放列表
+	
+	//循环遍历歌曲
+	int i=0;
+	TiXmlElement* pElem=NULL;
+	for(pElem = playlist->FirstChildElement();pElem;pElem=pElem->NextSiblingElement())
+	{
+		CString name,path,singer;
+
+		//歌曲名
+		TiXmlAttribute* pAttr = pElem->FirstAttribute();
+		name = UTF8toUnicode(pAttr->Value());
+		//const char* pName = pAttr->Value();
+		//AfxMessageBox(name);		
+		//ConvertCharToCString(pName,name);
+
+		//歌手
+		pAttr = pAttr->Next();
+		singer = UTF8toUnicode(pAttr->Value());
+		//const char* pSinger = pAttr->Value(); 
+		//ConvertCharToCString(pSinger,singer);
+
+		//路径
+		pAttr = pAttr->Next();
+		path = UTF8toUnicode(pAttr->Value());
+		//const char* pPath = pAttr->Value(); 
+		//ConvertCharToCString(pPath,path);
+
+		//AfxMessageBox(name+path+singer);
+
+		
+		//加入到列表中
+		this->m_ctrlPlayList.InsertItem(i,name);   //每一列的第一个数据要用InsertItem
+		this->m_ctrlPlayList.SetItemText(i,1,singer);
+		this->m_ctrlPlayList.SetItemText(i++,2,path);	
+
+		//AfxMessageBox(_T("afsdfasd"));
+	}
+
+	//this->m_ctrlPlayList.SetItemState(0, LVIS_SELECTED|LVIS_FOCUSED, LVIS_SELECTED|LVIS_FOCUSED);
+
+	UpdateData(false);
+
 	return true;
 }
 
